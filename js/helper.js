@@ -1,14 +1,7 @@
 /*
+This file contains all of the code running in the background that makes resumeBuilder.js possible.
+We call these helper functions because they support your code in this course.
 
-This file contains all of the code running in the background that makes resumeBuilder.js possible. We call these helper functions because they support your code in this course.
-
-Don't worry, you'll learn what's going on in this file throughout the course. You won't need to make any changes to it until you start experimenting with inserting a Google Map in Problem Set 3.
-
-Cameron Pittman
-*/
-
-
-/*
 These are HTML strings. As part of the course, you'll be using JavaScript functions
 replace the %data% placeholder text you see in them.
 */
@@ -26,7 +19,7 @@ var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</sp
 var HTMLbioPic = '<img src="%data%" class="biopic">';
 var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
+var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance:</h3><ul id="skills"></ul>';
 var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
@@ -55,19 +48,7 @@ var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
 var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
-var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
-
-
-/*
-The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
-*/
-$(document).ready(function() {
-  $('button').click(function() {
-    var iName = inName() || function(){};
-    $('#name').html(iName);
-  });
-});
 
 /*
 The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
@@ -85,18 +66,38 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
+  var x = loc.pageX;
+  var y = loc.pageY;
+
+  logClicks(x,y);
 });
 
-
-
+var contentString = '<div id="content">'+
+     '<div id="siteNotice">'+
+     '</div>'+
+     '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+     '<div id="bodyContent">'+
+     '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+     'sandstone rock formation in the southern part of the '+
+     'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+     'south west of the nearest large town, Alice Springs; 450&#160;km '+
+     '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+     'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+     'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+     'Aboriginal people of the area. It has many springs, waterholes, '+
+     'rock caves and ancient paintings. Uluru is listed as a World '+
+     'Heritage Site.</p>'+
+     '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+     'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+     '(last visited June 22, 2009).</p>'+
+     '</div>'+
+     '</div>';
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
 See the documentation below for more details.
 https://developers.google.com/maps/documentation/javascript/reference
 */
 var map;    // declares a global map variable
-
 
 /*
 Start here! initializeMap() is called when page is loaded.
@@ -113,8 +114,8 @@ function initializeMap() {
   For the map to be displayed, the googleMap var must be
   appended to #mapDiv in resumeBuilder.js.
   */
-  map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
+  map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
   /*
   locationFinder() returns an array of every location string from the JSONs
@@ -128,18 +129,12 @@ function initializeMap() {
     // adds the single location property from bio to the locations array
     locations.push(bio.contacts.location);
 
-    // iterates through school locations and appends each location to
-    // the locations array. Note that forEach is used for array iteration
-    // as described in the Udacity FEND Style Guide:
-    // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
+    // iterates through school locations and appends each location to the locations array.
     education.schools.forEach(function(school){
       locations.push(school.location);
     });
 
-    // iterates through work locations and appends each location to
-    // the locations array. Note that forEach is used for array iteration
-    // as described in the Udacity FEND Style Guide:
-    // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
+    // iterates through work locations and appends each location to the locations array.
     work.jobs.forEach(function(job){
       locations.push(job.location);
     });
@@ -176,7 +171,7 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -232,7 +227,6 @@ function initializeMap() {
   pinPoster(locations);
 
 }
-
 
 window.addEventListener('load', initializeMap);
 window.addEventListener('resize', function(e) {
