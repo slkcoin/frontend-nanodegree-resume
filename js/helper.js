@@ -4,6 +4,11 @@ We call these helper functions because they support your code in this course.
 
 These are HTML strings. As part of the course, you'll be using JavaScript functions
 replace the %data% placeholder text you see in them.
+
+This file was provided to me by Udacity in order to complete the Interactive Resume
+project. My only code modifications can be found on lines (72 -75) which is a function
+that logs click locations to the console and on line 158, which creates an info window
+when you click a pin on the google map. All other code and comments are by Udacity.
 */
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
 var HTMLheaderRole = '<span>%data%</span><hr>';

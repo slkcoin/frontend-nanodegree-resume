@@ -1,5 +1,6 @@
 /* This file contains 4 main JSON objects: bio, work, projects and edcuation.
-   Each object contains data that is used to populate the resume. */
+   Each object contains data that is used to populate the resume. All pictures
+   used in this project are my own property */
 
 
 //bio object: contains information about myself.
