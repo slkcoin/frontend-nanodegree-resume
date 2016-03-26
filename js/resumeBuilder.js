@@ -2,19 +2,21 @@
    Each object contains data that is used to populate the resume. All pictures
    used in this project are my own property */
 
+var DATA = '%data%'; //constant used to populate replace function
 
 //bio object: contains information about myself.
 var bio = {
   "name": "Joel Graham",
   "role": "Software Developer",
-  "welcomeMessage": "Front-End Nanodegree - Interactive Resume",
-  "biopic": "images/pic1.jpg",
   "contacts":{
-    "phone": "541-261-2394",
+    "mobile": "541-261-2394",
     "email": "xcoin@me.com",
     "github": "slkcoin",
     "location": "Alameda, California"},
+  "welcomeMessage": "Front-End Nanodegree - Interactive Resume",
   "skills": ["HTML","CSS", "JavaScript", "jQuery"],
+  "biopic": "images/pic1.jpg",
+
 
   /* Below is the bio object (encapsulated) display function. It uses local variables to take
      the data from the JSON object and replace it into the template found in helper.js
@@ -22,20 +24,20 @@ var bio = {
      append and prepend functions. */
 
   "display": function(){
-    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-    var formattedName = HTMLheaderName.replace("%data%", bio.name);
-    var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
-    var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-    var formattedPhone = HTMLmobile.replace("%data%", bio.contacts.phone);
-    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+    var formattedRole = HTMLheaderRole.replace(DATA, bio.role);
+    var formattedName = HTMLheaderName.replace(DATA, bio.name);
+    var formattedPic = HTMLbioPic.replace(DATA, bio.biopic);
+    var formattedMessage = HTMLwelcomeMsg.replace(DATA, bio.welcomeMessage);
+    var formattedPhone = HTMLmobile.replace(DATA, bio.contacts.phone);
+    var formattedEmail = HTMLemail.replace(DATA, bio.contacts.email);
+    var formattedGithub = HTMLgithub.replace(DATA, bio.contacts.github);
+    var formattedLocation = HTMLlocation.replace(DATA, bio.contacts.location);
 
 
     $("header").prepend(formattedPic);
     $("header").append(formattedName + formattedRole + HTMLcontactsStart);
     $("#navbar").append(formattedMessage);
-    
+
     $("#contacts, #footerContacts").append(formattedPhone + formattedEmail + formattedGithub + formattedLocation);
 
   /* Since "skills" is an array inside the bio object, I traverse the array using a
@@ -43,7 +45,7 @@ var bio = {
 
     $("#skills").append(HTMLskillsStart);
     bio.skills.forEach(function(skill){
-      var formattedSkill = HTMLskills.replace("%data%", skill);
+      var formattedSkill = HTMLskills.replace(DATA, skill);
       $("#skill").append(formattedSkill);
     });
   }
@@ -87,16 +89,16 @@ var work = {
      append and prepend functions. */
 
   "display": function(){
-    for(job in work.jobs){
+    work.jobs.forEach(function(job){
       $("#workExperience").append(HTMLworkStart);
-      var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-      var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-      var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-      var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-      var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+      var formattedEmployer = HTMLworkEmployer.replace(DATA, job.employer);
+      var formattedTitle = HTMLworkTitle.replace(DATA, job.title);
+      var formattedLocation = HTMLworkLocation.replace(DATA, job.location);
+      var formattedDates = HTMLworkDates.replace(DATA, job.dates);
+      var formattedDescription = HTMLworkDescription.replace(DATA, job.description);
 
       $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription);
-    }
+    });
   }
 };
 
@@ -123,21 +125,21 @@ var projects = {
    append and prepend functions. */
 
   "display": function(){
-    for(prj in projects.projects){
-      var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[prj].title);
-      var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[prj].dates);
-      var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[prj].description);
+    projects.projects.forEach(function(project){
+      var formattedTitle = HTMLprojectTitle.replace(DATA, project.title);
+      var formattedDates = HTMLprojectDates.replace(DATA, project.dates);
+      var formattedDescription = HTMLprojectDescription.replace(DATA, project.description);
 
       $("#projects").append(HTMLprojectStart);
       $(".project-entry:last").append(formattedTitle + formattedDates + formattedDescription);
 
     /* Since "images" is an array inside each project object, I traverse the array using a
         forEach loop, appending each image in the array */
-      projects.projects[prj].images.forEach(function(img){
-        var formattedPic = HTMLprojectImage.replace("%data%", img);
+      project.images.forEach(function(img){
+        var formattedPic = HTMLprojectImage.replace(DATA, img);
         $(".project-entry:last").append(formattedPic);
       });
-    }
+    });
   }
 };
 
@@ -162,7 +164,7 @@ var education = {
   "onlineCourse": [{
     "title": "JavaScript Basics",
     "school": "Udacity",
-    "dates": "March 2016",
+    "date": "March 2016",
     "url": "https://www.udacity.com/course/ud804"
   }],
 
@@ -172,18 +174,18 @@ var education = {
    append and prepend functions. */
 
   "display": function(){
-    for(school in education.schools){
+    education.schools.forEach(function(school){
       $("#education").append(HTMLschoolStart);
-      var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
-      formattedName = formattedName.replace('"#"', education.schools[school].url);
+      var formattedName = HTMLschoolName.replace(DATA, school.name);
+      formattedName = formattedName.replace('"#"', school.url);
 
-      var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
-      var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-      var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
-      var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+      var formattedLocation = HTMLschoolLocation.replace(DATA, school.location);
+      var formattedDegree = HTMLschoolDegree.replace(DATA, school.degree);
+      var formattedMajor = HTMLschoolMajor.replace(DATA, school.majors);
+      var formattedDates = HTMLschoolDates.replace(DATA, school.dates);
 
       $(".education-entry:last").append(formattedName + formattedDegree + formattedLocation + formattedDates + formattedMajor);
-    }
+    });
 
 /* Since the education object contains two separate objects (schools and onlineCourse),
    after we loop through each school object, we have to do the same process for each
@@ -191,19 +193,19 @@ var education = {
    a href information found in helper.js and populated it with the correct url. */
 
     $("#education").append(HTMLonlineClasses);
-    for (onlineCourse in education.onlineCourse){
+    education.onlineCourse.forEach(function(course){
       $("#education").append(HTMLschoolStart);
-      var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourse[onlineCourse].title);
-      formattedTitle = formattedTitle.replace('"#"', education.onlineCourse[onlineCourse].url);
+      var formattedTitle = HTMLonlineTitle.replace(DATA, course.title);
+      formattedTitle = formattedTitle.replace('"#"', course.url);
 
-      var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourse[onlineCourse].school);
-      var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourse[onlineCourse].dates);
+      var formattedSchool = HTMLonlineSchool.replace(DATA, course.school);
+      var formattedDates = HTMLonlineDates.replace(DATA, course.dates);
 
-      var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourse[onlineCourse].url);
-      formattedUrl = formattedUrl.replace('"#"', education.onlineCourse[onlineCourse].url);
+      var formattedUrl = HTMLonlineURL.replace(DATA, course.url);
+      formattedUrl = formattedUrl.replace('"#"', course.url);
 
       $(".education-entry:last").append(formattedTitle + formattedSchool + formattedDates + formattedUrl);
-    }
+    });
   }
 };
 
