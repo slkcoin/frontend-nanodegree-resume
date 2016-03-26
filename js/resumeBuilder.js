@@ -33,10 +33,9 @@ var bio = {
 
 
     $("header").prepend(formattedPic);
-    $("header").append(formattedName + formattedRole);
+    $("header").append(formattedName + formattedRole + HTMLcontactsStart);
     $("#navbar").append(formattedMessage);
-
-    $("header").append(HTMLcontactsStart);
+    
     $("#contacts, #footerContacts").append(formattedPhone + formattedEmail + formattedGithub + formattedLocation);
 
   /* Since "skills" is an array inside the bio object, I traverse the array using a
