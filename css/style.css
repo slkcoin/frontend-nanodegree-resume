@@ -1,69 +1,37 @@
-/* This file was provided to me by Udacity for completing the project. I changed the
-   font family to Helvetica because I like it. Everything else was not modified */
-   
-body,
-div,
-ul,
-li,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  padding:0;
-  margin:0;
-  font-family: "Helvetica", sans-serif;
+/* Normal css adjustments */
+
+header {
+  text-align: center;
+  border-bottom: 1px inset #000000;
+  list-style: none;
 }
 
-.clear-fix {
-  overflow: auto;
+a {
+  color: #1199c3;
+  text-decoration: none;
+  margin-top: 10px;
+  display: block;
+  font-size: 16px;
 }
 
-.education-entry,
-.work-entry,
-.project-entry {
-  padding: 0 5%;
+section {
+  border-bottom: 1px inset #000000;
 }
 
-h1 {
-  font-size: 40px;
-  color: #f5a623;
-  line-height: 48px;
-  display: inline;
-}
-
-h2 {
-  font-weight: bold;
-  font-size: 24px;
-  color: #999;
-  line-height: 29px;
-  padding: 10px;
-}
-
-h3 {
-  font-style: italic;
-  font-size: 20px;
-  color: #000;
-  line-height: 22px;
-}
-
-h4 {
-  font-weight: bold;
+p {
   font-size: 14px;
-  color: #4a4a4a;
-  line-height: 17px;
+  color: #333;
+  line-height: 25px;
 }
 
-h2,
-h3,
-h4,
-h5 {
-  padding:10px 5%;
-
+footer{
+  text-align: center;
 }
 
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
 
 .date-text {
   font-style: italic;
@@ -75,63 +43,25 @@ h5 {
 
 .location-text {
   font-style: italic;
-  font-size: 14px;
+  font-size: 12px;
   color: #999;
   line-height: 16px;
   float: right;
 
 }
 
-p {
-  font-size: 14px;
-  color: #333;
-  line-height: 21px;
-}
-
-a {
-  color: #1199c3;
-  text-decoration: none;
-  margin-top: 10px;
-  display: block;
-}
-
-.welcome-message {
-  font-style: italic;
-  font-size: 18px;
-  color: #f3f3f3;
-  line-height: 28px;
-}
-
-#skills-h3 {
-  color: #f5ae23;
-}
-
-.orange {
-  background-color: #f5ae23;
-}
-
-.orange-text {
-  color: #f5ae23;
-}
-
-.white-text {
-  font-weight: bold;
-  color: #fff;
-}
-
 .gray {
-  background-color: #f3f3f3;
+  background-color: hsla(0, 0%, 95%, .37);
   padding-bottom: 10px;
-  clear:both;
 }
 
-.dark-gray {
-  background-color: #4a4a4a;
+.biopic {
+  float: left;
+  margin: 0 0 25px 15px;
 }
 
-
-#header {
-  background-color: #484848;
+.project-entry.col-md-6 {
+  padding: 0px;
 }
 
 .flex-box {
@@ -141,76 +71,28 @@ a {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 10px;
+  margin-top: 17px;
 }
 
-.center-content {
-  padding: 2.5% 5%;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.biopic {
+.skill{
   float: left;
-  padding: 10px;
-  width: 200px;
-  display: none;
 }
 
-img {
-  padding: 10px;
+.btn{
+  float: right;
+  display: inline;
 }
 
-span {
-  padding: 5px;
+#projects{
+  padding-bottom: 10px;
 }
-
-#lets-connect {
-  text-align: center;
-}
-
-/* Media queries to handle various device widths */
-
-@media only screen and (max-width: 1024px) {
-  #lets-connect {
-    margin-top: 5%;
-  }
-}
-
-@media only screen and (max-width:900px) {
-  .biopic {
-    width: 175px;
-  }
-}
-
-@media only screen and (max-width: 750px) {
-  #lets-connect {
-    margin-top: 10%;
-  }
-  .biopic {
-    width: 150px;
-  }
-  .welcome-message {
-    display: none;
-  }
-}
-
 #map {
   display: block;
   height: 100%;
-  margin: 0 5%;
 }
 
 #mapDiv {
   height: 400px;
   width: 100%;
-  padding-bottom: 5%;
-}
-
-@media only screen and (min-width: 750px) {
-  #skills-h3,
-  .biopic {
-    display: block;
-  }
+  padding-bottom: 7%;
 }

@@ -1,47 +1,83 @@
-<!-- This entire HTML document is provided by Udacity for completing the Interactive
-     Resume project. I only removed extra comments I didn't need and cleaned up spacing. -->
+<!-- This site is designed using Bootstrap 3. I have added additononal
+     navbar functionality as well as collapsable sections for work, projects
+     and education. Bootstrap documentation was used throughout this project-->
 
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <title>Resume</title>
   <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/jQuery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/helper.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
   <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
-  <div id="main">
-    <div id="header" class="center-content clear-fix">
-      <ul id="topContacts" class="flex-box"></ul>
+  <!-- creates the navbar in its own container. Navbar implementation taken from
+    bootstrap documentation. Welcome message gets displayed here.-->
+  <nav class="navbar navbar-inverse">
+    <div class="container" id="navbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://github.com/slkcoin" target="_blank">GitHub</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
     </div>
-    <div style="clear: both;"></div>
-    <div id="workExperience" class="gray">
-      <h2>Work Experience</h2>
-    </div>
-    <div id="projects">
-      <h2>Projects</h2>
-    </div>
-    <div id="education" class="gray">
-      <h2>Education</h2>
-    </div>
-    <div id="mapDiv">
-      <h2>Where I've Lived and Worked</h2>
-    </div>
-    <div id="lets-connect" class="dark-gray">
-      <h2 class="orange center-text">Let's Connect</h2>
-        <ul id="footerContacts" class="flex-box">
+  </nav>
+
+  <!-- This is the primary container used for the bulk of the site content.
+  each part is broken down into rows and columns to fit the requirements when
+  using bootstrap.-->
+  <main class="container">
+    <header class="row"></header>
+
+    <!-- Empty sections like this one are populated by the javascript functions
+    found in resumeBuilder.js and helper.js -->
+    <section class="row" id="skills"></section>
+
+    <!-- The button is wrapped inside the h2 element here for easy float
+    alignment -->
+    <section class="row gray" id="workExperience">
+      <h2>Work Experience:<button type="button" class="btn btn-default"
+        data-toggle="collapse" data-target=".work-entry"> <span class="glyphicon glyphicon-menu-down"
+        aria-hidden="true"></span></button>
+      </h2>
+    </section>
+
+    <section class="row" id="projects">
+      <h2>Projects:<button type="button" class="btn btn-default"
+        data-toggle="collapse" data-target=".project-entry"> <span class="glyphicon glyphicon-menu-down"
+        aria-hidden="true"></span></button>
+      </h2>
+    </section>
+
+    <section class="row gray" id="education">
+      <h2>Education:<button type="button" class="btn btn-default"
+        data-toggle="collapse" data-target=".education-entry"> <span class="glyphicon glyphicon-menu-down"
+        aria-hidden="true"></span></button>
+      </h2>
+    </section>
+
+    <!-- This is where the google map is created, no collapse here. -->
+    <section class="row" id="mapDiv">
+      <h2>Where I've Lived and Worked:</h2>
+    </section>
+
+    <footer class="row" id="lets-connect">
+      <h2>Let's Connect</h2>
+        <ul class="flex-box" id="footerContacts">
       </ul>
-    </div>
-  </div>
+    </footer>
+  </main>
+
+  <!-- If no information is present, the section isn't displayed. This
+  script came with the original HTML file from Udacity -->
 
   <script src="js/resumeBuilder.js"></script>
+
   <script type="text/javascript">
-    if(document.getElementsByClassName('flex-item').length === 0) {
-      document.getElementById('topContacts').style.display = 'none';
-    }
     if(document.getElementsByTagName('h1').length === 0) {
       document.getElementById('header').style.display = 'none';
     }
@@ -54,7 +90,7 @@
     if(document.getElementsByClassName('education-entry').length === 0) {
       document.getElementById('education').style.display = 'none';
     }
-    if(document.getElementsByClassName('flex-item').length === 0) {
+    if(document.getElementsByTagName('footer').length === 0) {
       document.getElementById('lets-connect').style.display = 'none';
     }
     if(document.getElementById('map') === null) {

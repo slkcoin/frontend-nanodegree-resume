@@ -6,41 +6,41 @@ These are HTML strings. As part of the course, you'll be using JavaScript functi
 replace the %data% placeholder text you see in them.
 
 This file was provided to me by Udacity in order to complete the Interactive Resume
-project. My only code modifications can be found on lines (72 -75) which is a function
+project. Code modifications can be found on lines (72 -75) which is a function
 that logs click locations to the console and on line 158, which creates an info window
-when you click a pin on the google map. All other code and comments are by Udacity.
-*/
+when you click a pin on the google map. I have also made modifications to the variables
+used here so that they better fit my overall style for the page. All other comments were
+written by Udacity. */
+
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
-var HTMLheaderRole = '<span>%data%</span><hr>';
+var HTMLheaderRole = '<h2 id="role">%data%</h2>';
 
-var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
-var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
-var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
+var HTMLcontactsStart = '<div class="flex-box" id="contacts"></div>';
+var HTMLmobile = '<li class="flex-item">Mobile: %data%</li>';
+var HTMLemail = '<li class="flex-item">Email: %data%</li>';
+var HTMLgithub = '<li class="flex-item">Github: %data%</li>';
+var HTMLlocation = '<li class="flex-item">Location: %data%</li>';
 
-var HTMLbioPic = '<img src="%data%" class="biopic">';
-var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
+var HTMLbioPic = '<img src="%data%" class="biopic img-responsive">';
+var HTMLwelcomeMsg = '<a class="navbar-brand" href="#">%data%</a>';
 
-var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance:</h3><ul id="skills"></ul>';
-var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+var HTMLskillsStart = '<h2 class="skill">Skills:</h2><ul class="flex-box" id="skill"></ul>';
+var HTMLskills = '<li class="flex-item">%data%</li>';
 
-var HTMLworkStart = '<div class="work-entry"></div>';
+var HTMLworkStart = '<div class="work-entry collapse in"></div>';
 var HTMLworkEmployer = '<a href="#">%data%';
 var HTMLworkTitle = ' - %data%</a>';
 var HTMLworkDates = '<div class="date-text">%data%</div>';
 var HTMLworkLocation = '<div class="location-text">%data%</div>';
 var HTMLworkDescription = '<p><br>%data%</p>';
 
-var HTMLprojectStart = '<div class="project-entry"></div>';
+var HTMLprojectStart = '<div class="project-entry collapse in col-md-6"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+var HTMLprojectImage = '<img src="%data%" class="img-responsive">';
 
-var HTMLschoolStart = '<div class="education-entry"></div>';
+var HTMLschoolStart = '<div class="education-entry collapse in"></div>';
 var HTMLschoolName = '<a href="#">%data%';
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';

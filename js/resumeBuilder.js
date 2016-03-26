@@ -14,44 +14,41 @@ var bio = {
     "email": "xcoin@me.com",
     "github": "slkcoin",
     "location": "Alameda, California"},
-  "skills": ["HTML","CSS", "JavaScript", "jQuery"]
+  "skills": ["HTML","CSS", "JavaScript", "jQuery"],
+
+  /* Below is the bio object (encapsulated) display function. It uses local variables to take
+     the data from the JSON object and replace it into the template found in helper.js
+     After the data as been formatted, it modifies the DOM using the jQuery
+     append and prepend functions. */
+
+  "display": function(){
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
+    var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+    var formattedPhone = HTMLmobile.replace("%data%", bio.contacts.phone);
+    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+
+
+    $("header").prepend(formattedPic);
+    $("header").append(formattedName + formattedRole);
+    $("#navbar").append(formattedMessage);
+
+    $("header").append(HTMLcontactsStart);
+    $("#contacts, #footerContacts").append(formattedPhone + formattedEmail + formattedGithub + formattedLocation);
+
+  /* Since "skills" is an array inside the bio object, I traverse the array using a
+     forEach loop, appending each skill in the array */
+
+    $("#skills").append(HTMLskillsStart);
+    bio.skills.forEach(function(skill){
+      var formattedSkill = HTMLskills.replace("%data%", skill);
+      $("#skill").append(formattedSkill);
+    });
+  }
 };
-
-/* Below is the bio object (encapsulated) display function. It uses local variables to take
-   the data from the JSON object and replace it into the template found in helper.js
-   After the data as been formatted, it modifies the DOM using the jQuery
-   append and prepend functions. */
-
-bio.display = function(){
-  var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-  var formattedName = HTMLheaderName.replace("%data%", bio.name);
-  var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
-  var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-  var formattedPhone = HTMLmobile.replace("%data%", bio.contacts.phone);
-  var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-  var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-  var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-
-  $("#header").prepend(formattedRole);
-  $("#header").prepend(formattedName);
-  $("#header").append(formattedPic);
-  $("#header").append(formattedMessage);
-
-  $("#topContacts, #footerContacts").append(formattedPhone);
-  $("#topContacts, #footerContacts").append(formattedEmail);
-  $("#topContacts, #footerContacts").append(formattedGithub);
-  $("#topContacts, #footerContacts").append(formattedLocation);
-
-/* Since "skills" is an array inside the bio object, I traverse the array using a
-   forEach loop, appending each skill in the array */
-
-  $("#header").append(HTMLskillsStart);
-  bio.skills.forEach(function(skill){
-    var formattedSkill = HTMLskills.replace("%data%", skill);
-    $("#skills").append(formattedSkill);
-  });
-
-}(); //I immediately call the fucntion after it is declared
 
 //work object: contains information about my work experience
 var work = {
@@ -83,32 +80,28 @@ var work = {
       " while maintaining accuracy, safety and quality controls. Earned promotion" +
       " opportunities while facilitating a fun and focused atmosphere in a fast" +
       " paced work environment"
-  }]
+  }],
+
+  /* Below is the work object (encapsulated) display function. It uses local variables to take
+     the data from the JSON object and replace it into the template found in helper.js
+     After the data as been formatted, it modifies the DOM using the jQuery
+     append and prepend functions. */
+
+  "display": function(){
+    for(job in work.jobs){
+      $("#workExperience").append(HTMLworkStart);
+      var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+      var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+      var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+      var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+      var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+      $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription);
+    }
+  }
 };
 
-/* Below is the work object (encapsulated) display function. It uses local variables to take
-   the data from the JSON object and replace it into the template found in helper.js
-   After the data as been formatted, it modifies the DOM using the jQuery
-   append and prepend functions. */
-
-work.display = function(){
-  for(job in work.jobs){
-    $("#workExperience").append(HTMLworkStart);
-    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-    var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-    var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-    var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-    var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-
-    $(".work-entry:last").append(formattedEmployer + formattedTitle);
-    $(".work-entry:last").append(formattedLocation);
-    $(".work-entry:last").append(formattedDates);
-    $(".work-entry:last").append(formattedDescription);
-  }
-}(); // immediate function call
-
 //projects object: contains information about the projects I've work on so far
-
 var projects = {
   "projects": [
     {
@@ -121,42 +114,35 @@ var projects = {
       "title": "Interactive Resume",
       "dates": "March 2016",
       "description": "Created an interactive resume that uses javascript and" +
-        " the jQuery library. Data from JSONs are used to replace placeholder text" +
-        " before being append to the website on page-load.",
+        " the jQuery library.",
       "images": ["images/prj2-1.jpg", "images/prj2-2.jpg"]
-    }
-  ]
-};
+    }],
 
 /* Below is the projects object (encapsulated) display function. It uses local variables to take
    the data from the JSON object and replace it into the template found in helper.js
    After the data as been formatted, it modifies the DOM using the jQuery
    append and prepend functions. */
 
-projects.display = function(){
-  for(prj in projects.projects){
-    $("#projects").append(HTMLprojectStart);
-    var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[prj].title);
-    var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[prj].dates);
-    var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[prj].description);
+  "display": function(){
+    for(prj in projects.projects){
+      var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[prj].title);
+      var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[prj].dates);
+      var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[prj].description);
 
-    $(".project-entry:last").append(formattedTitle);
-    $(".project-entry:last").append(formattedDates);
-    $(".project-entry:last").append(formattedDescription);
+      $("#projects").append(HTMLprojectStart);
+      $(".project-entry:last").append(formattedTitle + formattedDates + formattedDescription);
 
-/* Since "images" is an array inside each project object, I traverse the array using a
-    forEach loop, appending each image in the array */
-
-    projects.projects[prj].images.forEach(function(img){
-      var formattedPic = HTMLprojectImage.replace("%data%", img);
-      $(".project-entry:last").append(formattedPic);
-    });
+    /* Since "images" is an array inside each project object, I traverse the array using a
+        forEach loop, appending each image in the array */
+      projects.projects[prj].images.forEach(function(img){
+        var formattedPic = HTMLprojectImage.replace("%data%", img);
+        $(".project-entry:last").append(formattedPic);
+      });
+    }
   }
-}(); //immediate function call
+};
 
-/*education object: contains information about schools I've attended and courses
-  taken online */
-
+// education object: contains information about schools I've attended and courses taken online
 var education = {
   "schools": [{
     "name": "Portland State University",
@@ -179,54 +165,54 @@ var education = {
     "school": "Udacity",
     "dates": "March 2016",
     "url": "https://www.udacity.com/course/ud804"
-  }]
-};
+  }],
 
 /* Below is the educations object (encapsulated) display function. It uses local variables to take
    the data from the JSON object and replace it into the template found in helper.js
    After the data as been formatted, it modifies the DOM using the jQuery
    append and prepend functions. */
 
-education.display = function(){
-  for(school in education.schools){
-    $("#education").append(HTMLschoolStart);
-    var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
-    formattedName = formattedName.replace('"#"', education.schools[school].url);
+  "display": function(){
+    for(school in education.schools){
+      $("#education").append(HTMLschoolStart);
+      var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
+      formattedName = formattedName.replace('"#"', education.schools[school].url);
 
-    var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
-    var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-    var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
-    var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+      var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+      var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+      var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
+      var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
 
-    $(".education-entry:last").append(formattedName + formattedDegree);
-    $(".education-entry:last").append(formattedLocation);
-    $(".education-entry:last").append(formattedDates);
-    $(".education-entry:last").append(formattedMajor);
-  }
+      $(".education-entry:last").append(formattedName + formattedDegree + formattedLocation + formattedDates + formattedMajor);
+    }
 
 /* Since the education object contains two separate objects (schools and onlineCourse),
    after we loop through each school object, we have to do the same process for each
    online course taken as well. In addition to formatting the name, I updated the
    a href information found in helper.js and populated it with the correct url. */
 
-  $("#education").append(HTMLonlineClasses);
+    $("#education").append(HTMLonlineClasses);
+    for (onlineCourse in education.onlineCourse){
+      $("#education").append(HTMLschoolStart);
+      var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourse[onlineCourse].title);
+      formattedTitle = formattedTitle.replace('"#"', education.onlineCourse[onlineCourse].url);
 
-  for (onlineCourse in education.onlineCourse){
-    $("#education").append(HTMLschoolStart);
-    var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourse[onlineCourse].title);
-    formattedTitle = formattedTitle.replace('"#"', education.onlineCourse[onlineCourse].url);
+      var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourse[onlineCourse].school);
+      var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourse[onlineCourse].dates);
 
-    var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourse[onlineCourse].school);
-    var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourse[onlineCourse].dates);
+      var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourse[onlineCourse].url);
+      formattedUrl = formattedUrl.replace('"#"', education.onlineCourse[onlineCourse].url);
 
-    var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourse[onlineCourse].url);
-    formattedUrl = formattedUrl.replace('"#"', education.onlineCourse[onlineCourse].url);
-
-    $(".education-entry:last").append(formattedTitle + formattedSchool);
-    $(".education-entry:last").append(formattedDates);
-    $(".education-entry:last").append(formattedUrl);
+      $(".education-entry:last").append(formattedTitle + formattedSchool + formattedDates + formattedUrl);
+    }
   }
-}(); //immediate function call
+};
+
+//each function is called to populate the resume data
+bio.display();
+work.display();
+projects.display();
+education.display();
 
 /* Below adds the google map to the resume. The map is managed by helper.js, provided by
 Udacity for this project. Some modifications were made to include click locations via console.log
