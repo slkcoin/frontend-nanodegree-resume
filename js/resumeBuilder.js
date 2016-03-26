@@ -199,7 +199,7 @@ var education = {
       formattedTitle = formattedTitle.replace('"#"', course.url);
 
       var formattedSchool = HTMLonlineSchool.replace(DATA, course.school);
-      var formattedDates = HTMLonlineDates.replace(DATA, course.dates);
+      var formattedDates = HTMLonlineDates.replace(DATA, course.date);
 
       var formattedUrl = HTMLonlineURL.replace(DATA, course.url);
       formattedUrl = formattedUrl.replace('"#"', course.url);
