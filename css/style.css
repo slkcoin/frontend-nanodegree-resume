@@ -3,7 +3,6 @@
 header {
   text-align: center;
   border-bottom: 1px inset #000000;
-  list-style: none;
 }
 
 a {
@@ -47,7 +46,6 @@ footer{
   color: #999;
   line-height: 16px;
   float: right;
-
 }
 
 .gray {
@@ -72,6 +70,7 @@ footer{
   justify-content: space-around;
   padding: 10px;
   margin-top: 17px;
+  list-style: none;
 }
 
 .skill{
